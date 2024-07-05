@@ -1,0 +1,24 @@
+# System files
+.DS_Store
+
+# IDE files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# API keys and secrets
+.env
+
+# Miscellaneous
+*.tmp
+*.bak
