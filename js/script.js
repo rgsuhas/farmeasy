@@ -45,3 +45,22 @@ function divideArea() {
 }
 
 window.onload = initMap;
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+
+  const drawingManager = new google.maps.drawing.DrawingManager({
+    drawingMode: google.maps.drawing.OverlayType.POLYGON,
+    drawingControl: true,
+    drawingControlOptions: {
+      position: google.maps.ControlPosition.TOP_CENTER,
+      drawingModes: ["polygon"],
+    },
+  });
+  drawingManager.setMap(map);
+}
+
+// Call initMap when the page loads
+google.maps.event.addDomListener(window, 'load', initMap);
