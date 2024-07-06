@@ -7,12 +7,32 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="map"></div>
-    <div id="controls">
-        <button id="calculate">Calculate Area</button>
-        <button id="divide">Divide Area</button>
-    </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=geometry,drawing"></script>
+    <header>
+        <h1>Irrigation Area Calculator</h1>
+    </header>
+    <main>
+        <div id="map-placeholder">Map will be displayed here once Google Maps API is integrated</div>
+        <div id="controls">
+            <button id="add-polygon-btn">Add Polygon</button>
+            <button id="clear-polygons-btn">Clear Polygons</button>
+            <button id="calculate-btn">Calculate Total Area</button>
+            <input type="number" id="section-input" placeholder="Number of sections" min="1">
+            <button id="divide-btn">Divide Area</button>
+        </div>
+        <div id="results">
+            <h2>Results</h2>
+            <p id="total-area">Total Area: <span>0</span> sq meters</p>
+            <p id="sections">Number of Sections: <span>0</span></p>
+            <p id="area-per-section"></p>
+        </div>
+        <div id="polygon-info">
+            <h2>Polygons</h2>
+            <ul id="polygon-list"></ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Your Name - Irrigation Area Calculator</p>
+    </footer>
     <script src="js/script.js"></script>
 </body>
 </html>
