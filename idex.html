@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Irrigation Area Calculator</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -11,13 +13,12 @@
         <h1>Irrigation Area Calculator</h1>
     </header>
     <main>
-        <div id="map-placeholder">Map will be displayed here once Google Maps API is integrated</div>
+        <div id="map"></div>
         <div id="controls">
-            <button id="add-polygon-btn">Add Polygon</button>
-            <button id="clear-polygons-btn">Clear Polygons</button>
             <button id="calculate-btn">Calculate Total Area</button>
             <input type="number" id="section-input" placeholder="Number of sections" min="1">
             <button id="divide-btn">Divide Area</button>
+            <button id="clear-btn">Clear All</button>
         </div>
         <div id="results">
             <h2>Results</h2>
@@ -33,6 +34,8 @@
     <footer>
         <p>&copy; 2023 Your Name - Irrigation Area Calculator</p>
     </footer>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
