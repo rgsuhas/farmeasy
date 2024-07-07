@@ -3,16 +3,16 @@ let drawnItems;
 let drawControl;
 
 function initMap() {
-    map = L.map('map').setView([0, 0], 2);
+    var map = L.map('map').setView([51.505, -0.09], 13); // Adjust initial coordinates and zoom level
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    drawnItems = new L.FeatureGroup();
+    var drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
 
-    drawControl = new L.Control.Draw({
+    var drawControl = new L.Control.Draw({
         draw: {
             polygon: true,
             polyline: false,
@@ -31,8 +31,8 @@ function initMap() {
     map.on(L.Draw.Event.CREATED, function (event) {
         var layer = event.layer;
         drawnItems.addLayer(layer);
-        updatePolygonList();
-        calculateArea();
+        updatePolygonList(); // Function to update the list of drawn polygons
+        calculateArea(); // Function to calculate total area
     });
 
     map.on(L.Draw.Event.DELETED, function (event) {
@@ -40,6 +40,10 @@ function initMap() {
         calculateArea();
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    initMap(); // Initialize map when DOM is fully loaded
+});
 
 function calculateArea() {
     let totalArea = 0;
