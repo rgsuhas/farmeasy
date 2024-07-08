@@ -52,15 +52,7 @@ button {
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
-/* Add this to your existing CSS */
-.bend-icon {
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 20px;
-    font-weight: bold;
-}
+
 button:hover {
     background-color: #2980b9;
 }
