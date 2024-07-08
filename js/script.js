@@ -16,19 +16,19 @@ function initMap() {
     });
 
     // Use Stamen Watercolor tiles
-    var tileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
+    var ttileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png', {
         attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
     });
 
     // Add the street layer to the map
     streetLayer.addTo(map);
     // Add the tile layer to the map
-    tileLayer.addTo(map);
+    ttileLayer.addTo(map);
     // Add layer control to switch between street view and satellite view
     var baseMaps = {
         "Street View": streetLayer,
         "Satellite View": satelliteLayer,
-        "Stamen Watercolor":tilelayer
+        "Stamen Watercolor":ttilelayer
     };
 
     L.control.layers(baseMaps).addTo(map);
