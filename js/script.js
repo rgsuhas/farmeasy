@@ -26,7 +26,8 @@ function initMap() {
     // Add layer control to switch between street view and satellite view
     var baseMaps = {
         "Street View": streetLayer,
-        "Satellite View": satelliteLayer
+        "Satellite View": satelliteLayer,
+        "Stamen Watercolor":tilelayer
     };
 
     L.control.layers(baseMaps).addTo(map);
