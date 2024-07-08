@@ -22,7 +22,8 @@ function initMap() {
 
     // Add the street layer to the map
     streetLayer.addTo(map);
-
+    // Add the tile layer to the map
+    tileLayer.addTo(map);
     // Add layer control to switch between street view and satellite view
     var baseMaps = {
         "Street View": streetLayer,
