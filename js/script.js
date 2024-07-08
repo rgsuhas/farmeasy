@@ -3,16 +3,35 @@ let drawnItems;
 let drawControl;
 
 function initMap() {
-    var map = L.map('map').setView([51.505, -0.09], 13); // Adjust initial coordinates and zoom level
+    // Create the map and set the default view
+    map = L.map('map').setView([0, 0], 2);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Define the tile layers
+    var streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+    });
 
-    var drawnItems = new L.FeatureGroup();
+    var satelliteLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    });
+
+    // Add the street layer to the map
+    streetLayer.addTo(map);
+
+    // Add layer control to switch between street view and satellite view
+    var baseMaps = {
+        "Street View": streetLayer,
+        "Satellite View": satelliteLayer
+    };
+
+    L.control.layers(baseMaps).addTo(map);
+
+    // Initialize the FeatureGroup to store drawn items
+    drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
 
-    var drawControl = new L.Control.Draw({
+    // Add the drawing control
+    drawControl = new L.Control.Draw({
         draw: {
             polygon: true,
             polyline: false,
@@ -28,11 +47,12 @@ function initMap() {
     });
     map.addControl(drawControl);
 
+    // Event listeners for drawing and deleting polygons
     map.on(L.Draw.Event.CREATED, function (event) {
         var layer = event.layer;
         drawnItems.addLayer(layer);
-        updatePolygonList(); // Function to update the list of drawn polygons
-        calculateArea(); // Function to calculate total area
+        updatePolygonList();
+        calculateArea();
     });
 
     map.on(L.Draw.Event.DELETED, function (event) {
@@ -41,66 +61,46 @@ function initMap() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    initMap(); // Initialize map when DOM is fully loaded
-});
+function updatePolygonList() {
+    let list = document.getElementById('polygon-list');
+    list.innerHTML = '';
+    drawnItems.eachLayer(function(layer) {
+        if (layer instanceof L.Polygon) {
+            let li = document.createElement('li');
+            li.textContent = 'Polygon: ' + layer._leaflet_id;
+            list.appendChild(li);
+        }
+    });
+}
 
 function calculateArea() {
     let totalArea = 0;
-    drawnItems.eachLayer(function (layer) {
+    drawnItems.eachLayer(function(layer) {
         if (layer instanceof L.Polygon) {
             totalArea += L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
         }
     });
-    totalArea = totalArea / 1000000; // Convert to square kilometers
-    document.querySelector('#total-area span').textContent = totalArea.toFixed(4);
-    return totalArea;
+    document.getElementById('total-area').querySelector('span').textContent = totalArea.toFixed(2);
 }
 
 function divideArea() {
-    let totalArea = calculateArea();
-    let numberOfSections = parseInt(document.getElementById('section-input').value) || 1;
-    if (numberOfSections < 1) {
-        alert("Please enter a valid number of sections (minimum 1)");
+    let sections = parseInt(document.getElementById('section-input').value);
+    let totalArea = parseFloat(document.getElementById('total-area').querySelector('span').textContent);
+    if (isNaN(sections) || sections <= 0) {
+        alert('Please enter a valid number of sections.');
         return;
     }
-    let areaPerSection = totalArea / numberOfSections;
-    
-    document.querySelector('#sections span').textContent = numberOfSections;
-    document.querySelector('#area-per-section').textContent = `Area per section: ${areaPerSection.toFixed(4)} sq km`;
+    let areaPerSection = totalArea / sections;
+    document.getElementById('sections').querySelector('span').textContent = sections;
+    document.getElementById('area-per-section').textContent = 'Area per Section: ' + areaPerSection.toFixed(2) + ' sq meters';
 }
 
-function updatePolygonList() {
-    let list = document.getElementById('polygon-list');
-    list.innerHTML = '';
-    let index = 1;
-    drawnItems.eachLayer(function (layer) {
-        if (layer instanceof L.Polygon) {
-            let area = L.GeometryUtil.geodesicArea(layer.getLatLngs()[0]) / 1000000;
-            let li = document.createElement('li');
-            li.textContent = `Polygon ${index}: ${area.toFixed(4)} sq km`;
-            list.appendChild(li);
-            index++;
-        }
-    });
-}
-
-function clearAll() {
+document.getElementById('calculate-btn').addEventListener('click', calculateArea);
+document.getElementById('divide-btn').addEventListener('click', divideArea);
+document.getElementById('clear-btn').addEventListener('click', function() {
     drawnItems.clearLayers();
     updatePolygonList();
     calculateArea();
-    document.querySelector('#sections span').textContent = '0';
-    document.querySelector('#area-per-section').textContent = '';
-}
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    initMap();
-    document.getElementById('calculate-btn').addEventListener('click', calculateArea);
-    document.getElementById('divide-btn').addEventListener('click', divideArea);
-    document.getElementById('clear-btn').addEventListener('click', clearAll);
-
-    document.getElementById('section-input').addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-        if (this.value < 1) this.value = 1;
-    });
 });
+
+document.addEventListener('DOMContentLoaded', initMap);
