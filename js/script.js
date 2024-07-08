@@ -15,6 +15,11 @@ function initMap() {
         attribution: '© OpenStreetMap contributors'
     });
 
+    // Use Stamen Watercolor tiles
+    var tileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
+        attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+    });
+
     // Add the street layer to the map
     streetLayer.addTo(map);
 
