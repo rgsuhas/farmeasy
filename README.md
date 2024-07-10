@@ -36,13 +36,13 @@ cd farmeasy
 
 ## Project Structure
 farmeasy/
-├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
-├── .gitignore
-└── README.md
+├──  index.html
+├──  css/
+│    └── styles.css
+├──  js/
+│    └── script.js
+├──  .gitignore
+└──  README.md
 
 ## Contributing
 Contributions to improve the Irrigation Area Calculator are welcome. Please follow these steps to contribute:
