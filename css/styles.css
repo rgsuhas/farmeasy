@@ -26,7 +26,7 @@ main {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-#map {
+#map, #sprinkler-map {
     width: 100%;
     height: 400px;
     margin-bottom: 1rem;
@@ -57,22 +57,22 @@ button:hover {
     background-color: #2980b9;
 }
 
-#section-input {
+#section-input, #sprinkler-input {
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #bdc3c7;
     border-radius: 5px;
-    width: 150px;
+    width: 250px;
 }
 
-#results, #polygon-info {
+#results, #polygon-info, #sprinkler-info {
     background-color: #ecf0f1;
     padding: 1rem;
     border-radius: 5px;
     margin-bottom: 1rem;
 }
 
-#results h2, #polygon-info h2 {
+#results h2, #polygon-info h2, #sprinkler-info h2, #sprinkler-visualization h2 {
     margin-top: 0;
     color: #2c3e50;
 }
@@ -100,7 +100,7 @@ button:hover {
         align-items: stretch;
     }
 
-    #section-input {
+    #section-input, #sprinkler-input {
         width: 100%;
     }
 }
