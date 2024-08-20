@@ -18,7 +18,7 @@ FARMEASY (The Irrigation Area Calculator) is a web-based tool designed to help a
 
 ## Prerequisites
 - A modern web browser (e.g., Chrome, Firefox, Safari)
-- A Google Maps API key
+- Openmaps 
 
 ## Setup and Installation
 1. Clone the repository:
