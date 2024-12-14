@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Calculator container */
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        /* Title */
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Input fields */
+        input[type="number"] {
+            width: calc(50% - 10px);
+            padding: 10px;
+            margin: 10px 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        button {
+            width: calc(33.33% - 10px);
+            padding: 10px;
+            margin: 10px 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Result display */
+        #result {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h2>Simple Calculator</h2>
+
+        <!-- Input fields -->
+        <input type="number" id="num1" placeholder="Enter 1st number">
+        <input type="number" id="num2" placeholder="Enter 2nd number">
+
+        <!-- Calculator buttons -->
+        <button onclick="calculate('sum')">Sum (+)</button>
+        <button onclick="calculate('diff')">Difference (-)</button>
+        <button onclick="calculate('prod')">Product (×)</button>
+        <button onclick="calculate('quot')">Quotient (÷)</button>
+        <button onclick="calculate('rem')">Remainder (%)</button>
+        <button onclick="calculate('pow')">Power (^)</button>
+        <button onclick="calculate('sqrt')">Square Root (√)</button>
+        <button onclick="calculate('square')">Square (x²)</button>
+
+        <!-- Result display -->
+        <div id="result"></div>
+    </div>
+
+    <!-- JavaScript for calculator -->
+    <script>
+        function calculate(operation) {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            let result = 0;
+
+            // Perform calculations based on the operation
+            switch (operation) {
+                case 'sum':
+                    result = num1 + num2;
+                    break;
+                case 'diff':
+                    result = num1 - num2;
+                    break;
+                case 'prod':
+                    result = num1 * num2;
+                    break;
+                case 'quot':
+                    result = num1 / num2;
+                    break;
+                case 'rem':
+                    result = num1 % num2;
+                    break;
+                case 'pow':
+                    result = Math.pow(num1, num2);
+                    break;
+                case 'sqrt':
+                    result = `√${num1} = ${Math.sqrt(num1)}, √${num2} = ${Math.sqrt(num2)}`;
+                    break;
+                case 'square':
+                    result = `${num1}² = ${num1 * num1}, ${num2}² = ${num2 * num2}`;
+                    break;
+                default:
+                    result = 'Invalid operation';
+            }
+
+            // Display the result
+            document.getElementById('result').innerHTML = `Result: ${result}`;
+        }
+    </script>
+
+</body>
+</html>
